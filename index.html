@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StoreTrack - Inventory Management</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header class="sidebar" id="sidebar-nav">
+            <div class="logo">
+                <i class="fas fa-chart-line"></i>
+                <h2>StoreTrack</h2>
+            </div>
+            <nav class="nav-menu">
+                <button id="products-btn" class="nav-item active"><i class="fas fa-box"></i><span>Products</span></button>
+                <button id="orders-btn" class="nav-item"><i class="fas fa-shopping-cart"></i><span>Orders</span></button>
+                <button id="reports-btn" class="nav-item"><i class="fas fa-chart-pie"></i><span>Reports</span></button>
+            </nav>
+            <div class="logout-btn-container">
+                <button id="logout-btn" class="nav-item"><i class="fas fa-sign-out-alt"></i><span>Logout</span></button>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <section id="auth-section" class="content-section">
+                <div class="auth-card-container" id="auth-forms-container">
+                    <div class="auth-card active" id="login-card">
+                        <h3>Login</h3>
+                        <form id="login-form">
+                            <div class="form-group">
+                                <label for="login-email">Email</label>
+                                <input type="email" id="login-email" placeholder="email@example.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="login-password">Password</label>
+                                <input type="password" id="login-password" placeholder="********" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Login</button>
+                            <div id="login-message" class="message"></div>
+                        </form>
+                        <p class="auth-toggle">Don't have an account? <a href="#" id="show-register">Register here</a></p>
+                    </div>
+
+                    <div class="auth-card" id="register-card">
+                        <h3>Register</h3>
+                        <form id="register-form">
+                             <div class="form-group">
+                                <label for="register-name">Name</label>
+                                <input type="text" id="register-name" placeholder="John Doe" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="register-email">Email</label>
+                                <input type="email" id="register-email" placeholder="email@example.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="register-password">Password</label>
+                                <input type="password" id="register-password" placeholder="********" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Register</button>
+                            <div id="register-message" class="message"></div>
+                        </form>
+                        <p class="auth-toggle">Already have an account? <a href="#" id="show-login">Login here</a></p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="products-section" class="content-section">
+                <div class="section-header">
+                    <h2>Products</h2>
+                    <button id="add-product-btn" class="btn btn-primary"><i class="fas fa-plus"></i> Add New Product</button>
+                </div>
+                <div class="controls-container">
+                    <input type="text" id="product-search" placeholder="Search products by name or category...">
+                    <select id="product-sort">
+                        <option value="newest">Newest First</option>
+                        <option value="price_asc">Price (Low to High)</option>
+                        <option value="price_desc">Price (High to Low)</option>
+                    </select>
+                </div>
+                <div class="form-card" id="product-form-container">
+                    <form id="product-form">
+                        <h3><span id="form-title">Add</span> Product</h3>
+                        <div class="form-group">
+                            <label for="product-name">Product Name</label>
+                            <input type="text" id="product-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="product-price">Price</label>
+                            <input type="number" id="product-price" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="product-stock">Stock</label>
+                            <input type="number" id="product-stock" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="product-category">Category</label>
+                            <input type="text" id="product-category" required>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Save Product</button>
+                            <button type="button" class="btn btn-secondary" id="cancel-product-btn">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-grid" id="products-list">
+                    </div>
+            </section>
+
+            <section id="orders-section" class="content-section">
+                <div class="section-header">
+                    <h2>Orders</h2>
+                    <button id="add-order-btn" class="btn btn-primary"><i class="fas fa-plus"></i> Create New Order</button>
+                </div>
+                <div class="controls-container">
+                    <input type="text" id="order-search" placeholder="Filter orders by product name...">
+                    <div class="date-range-group">
+                        <label for="order-start-date">From:</label>
+                        <input type="date" id="order-start-date">
+                        <label for="order-end-date">To:</label>
+                        <input type="date" id="order-end-date">
+                    </div>
+                    <button id="filter-orders-btn" class="btn btn-secondary">Filter</button>
+                </div>
+                <div class="form-card" id="order-form-container">
+                    <form id="order-form">
+                        <h3>Create New Order</h3>
+                        <div class="form-group">
+                            <label for="order-product-select">Product</label>
+                            <div class="input-group">
+                                <select id="order-product-select" required></select>
+                                <input type="number" id="order-product-quantity" value="1" min="1" required>
+                                <button type="button" id="add-product-to-order-btn" class="btn btn-primary"><i class="fas fa-plus"></i> Add</button>
+                            </div>
+                        </div>
+                        <div id="order-products-list" class="added-products-list">
+                            </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Create Order</button>
+                            <button type="button" class="btn btn-secondary" id="cancel-order-btn">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-grid" id="orders-list">
+                    </div>
+            </section>
+
+            <section id="reports-section" class="content-section">
+                <div class="section-header">
+                    <h2>Reports</h2>
+                </div>
+                <div class="report-controls">
+                    <button id="sales-report-btn" class="btn btn-primary"><i class="fas fa-money-bill-wave"></i> Get Sales Report</button>
+                    <button id="low-stock-report-btn" class="btn btn-secondary"><i class="fas fa-exclamation-triangle"></i> Get Low Stock Report</button>
+                </div>
+                <div id="reports-output" class="report-output-container">
+                    <h3 id="report-title"></h3>
+                    <div id="report-table-container"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+<script src="script.js"></script>
+</html>
